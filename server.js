@@ -22,9 +22,9 @@ wss.on('connection', (ws) => {
         try {
             const data = JSON.parse(message);
             
-            // Broadcast message to all connected clients
+            // Broadcast message to all other connected clients
             clients.forEach((client) => {
-                if (client.readyState === WebSocket.OPEN) {
+                if (client !== ws && client.readyState === WebSocket.OPEN) {
                     client.send(JSON.stringify(data));
                 }
             });
