@@ -1,0 +1,3290 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WE ARE META - Anti-META Movement</title>
+    <style>
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'VT323', monospace;
+            z-index: 10000;
+            color: #ffffff;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, #000 25%, #111 50%, #000 75%);
+            animation: gradientShift 10s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes glitch {
+            0% { clip-path: inset(40% 0 61% 0); }
+            20% { clip-path: inset(92% 0 1% 0); }
+            40% { clip-path: inset(43% 0 1% 0); }
+            60% { clip-path: inset(25% 0 58% 0); }
+            80% { clip-path: inset(54% 0 7% 0); }
+            100% { clip-path: inset(58% 0 43% 0); }
+        }
+
+        #loading-screen .progress-container {
+            width: 300px;
+            height: 30px;
+            background: #000;
+            border: 2px solid #fff;
+            padding: 2px;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #loading-screen .progress-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: loading-shine 2s infinite;
+        }
+
+        @keyframes loading-shine {
+            to {
+                left: 100%;
+            }
+        }
+
+        #loading-screen .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #fff, #888, #fff);
+            animation: progress 3s linear forwards, glowPulse 2s infinite;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); }
+            50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.9); }
+        }
+
+        #loading-screen .loading-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        #loading-screen .windows-logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        @keyframes progress {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        #loading-screen .text {
+            text-align: center;
+            color: #ffffff;
+            font-size: 48px;
+            font-weight: bold;
+            opacity: 0;
+            animation: powerOn 1s forwards, pulse 2s infinite;
+            animation-delay: 2.5s, 2.5s;
+            text-shadow: 0 0 30px #ffffff;
+            font-weight: 900;
+            font-family: 'VT323', monospace;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes glitch {
+            0% { 
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes glitchText {
+            0%, 100% { 
+                transform: translate(0);
+                opacity: 1;
+            }
+            92% { 
+                transform: translate(-2px, 0);
+                opacity: 0.8;
+            }
+            94% { 
+                transform: translate(2px, -2px);
+                opacity: 0.9;
+            }
+            96% { 
+                transform: translate(-1px, 1px);
+                opacity: 0.85;
+            }
+            98% { 
+                transform: translate(1px, -1px);
+                opacity: 0.95;
+            }
+        }
+
+        @keyframes scanLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.05); filter: brightness(1.2); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+
+        @keyframes typeWriter {
+            0% {
+                opacity: 0;
+                clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+            }
+            100% {
+                opacity: 1;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        @keyframes powerOn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .bios-text:nth-child(1) { animation-delay: 1s, 0s; }
+        .bios-text:nth-child(2) { animation-delay: 2s, 0s; }
+        .bios-text:nth-child(3) { animation-delay: 3s, 0s; }
+        .bios-text:nth-child(4) { animation-delay: 4s, 0s; }
+        .bios-text:nth-child(5) { animation-delay: 5s, 0s; }
+
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'VT323', "MS Sans Serif", monospace;
+            image-rendering: pixelated;
+        }
+
+        #background-video, #mobile-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            background: #000;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        @keyframes videoGlitch {
+            0%, 100% { 
+                transform: translate(0);
+                filter: contrast(1.2) brightness(0.8);
+            }
+            15% {
+                transform: translate(-5px, 0);
+                filter: contrast(1.4) brightness(0.7) hue-rotate(90deg);
+            }
+            25% {
+                transform: translate(5px, 0);
+                filter: contrast(1.3) brightness(0.8) hue-rotate(-90deg);
+            }
+            35% {
+                transform: translate(0);
+                filter: contrast(1.2) brightness(0.8);
+            }
+            65% {
+                transform: translate(3px, 0);
+                filter: contrast(1.3) brightness(0.7) hue-rotate(45deg);
+            }
+            75% {
+                transform: translate(-3px, 0);
+                filter: contrast(1.4) brightness(0.8) hue-rotate(-45deg);
+            }
+            85% {
+                transform: translate(0);
+                filter: contrast(1.2) brightness(0.8);
+            }
+        }
+
+        body {
+            background-color: #000000;
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            #background-video {
+                display: none;
+            }
+            #mobile-video {
+                display: block !important;
+            }
+        }
+
+        #mobile-video {
+            display: none;
+        }
+
+
+        .desktop {
+            height: calc(100vh - 28px);
+            position: relative;
+            padding: 20px;
+        }
+
+        .desktop-icon {
+            width: 110px;
+            text-align: center;
+            margin: 0;
+            color: white;
+            cursor: pointer;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            background: none;
+        }
+
+        .desktop-icon > div {
+            height: 72px;
+            width: 72px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px !important;
+            position: relative;
+            background: none;
+            border: 1px solid #ffffff;
+            border-radius: 12px;
+        }
+
+        .desktop-icon span {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            font-family: 'VT323', monospace;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Increase general font sizes */
+        .window-content {
+            font-size: 14px;
+        }
+
+        .title-bar {
+            font-size: 14px;
+            padding: 4px 6px;
+        }
+
+        .taskbar {
+            height: 35px;
+        }
+
+        .start-button {
+            height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+        }
+
+        .taskbar-item {
+            font-size: 14px;
+            padding: 5px 8px;
+        }
+
+        .taskbar-tray {
+            font-size: 16px;
+            gap: 12px;
+            padding: 0 10px;
+        }
+
+        .window {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 300px;
+            max-width: 90vw;
+            max-height: 85vh;
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.1),
+                0 0 40px rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            image-rendering: pixelated;
+            color: #ffffff;
+            backdrop-filter: blur(5px);
+            animation: windowAppear 0.3s ease-out;
+        }
+
+        @keyframes windowAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .window.active {
+            z-index: 100;
+            box-shadow: 0 12px 48px rgba(255, 0, 0, 0.25);
+            transform: translateY(-2px);
+            border-color: rgba(255, 0, 0, 0.6);
+        }
+
+        .title-bar {
+            background: rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            animation: scanline 2s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .title-bar.inactive {
+            background: #1a1a1a;
+        }
+
+        .title-bar-text {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .title-bar-controls {
+            display: flex;
+            gap: 2px;
+        }
+
+        .title-bar-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .title-bar-controls button {
+            width: 20px;
+            height: 20px;
+            margin-left: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .title-bar-controls button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-1px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .title-bar-controls button:active {
+            transform: translateY(0);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .title-bar-controls button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .title-bar-controls button:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .title-bar-controls button:hover::before {
+            opacity: 1;
+        }
+
+        .title-bar-controls button:active {
+            transform: translateY(0);
+        }
+
+        .title-bar-controls button:last-child {
+            background: rgba(255, 0, 0, 0.15);
+        }
+
+        .title-bar-controls button:last-child:hover {
+            background: rgba(255, 0, 0, 0.25);
+        }
+
+        .window-content {
+            padding: 8px;
+            background: #000000;
+            color: #ffffff;
+            display: flex;
+            gap: 8px;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+            line-height: 1.4;
+            overflow-y: auto;
+            flex: 1;
+            text-shadow: none;
+            border-top: 1px solid #dfdfdf;
+            border-left: 1px solid #dfdfdf;
+            border-right: 1px solid #808080;
+            border-bottom: 1px solid #808080;
+        }
+
+        .window-content::-webkit-scrollbar {
+            width: 16px;
+            background: #8B4513;
+        }
+
+        .window-content::-webkit-scrollbar-track {
+            background: #8B4513;
+            border: 2px solid #f97316;
+        }
+
+        .window-content::-webkit-scrollbar-thumb {
+            background: #ff0000;
+            border: 2px solid #ff0000;
+            box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .window-content::-webkit-scrollbar-thumb:hover {
+            background: #ff0000;
+        }
+
+        .window-content h1 {
+            font-size: 36px;
+            margin-bottom: 24px;
+            color: #ffffff;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            font-family: 'VT323', monospace;
+        }
+
+        .window-content h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: 'VT323', monospace;
+        }
+
+        .window-content h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #ffffff;
+            font-weight: 600;
+            font-family: 'VT323', monospace;
+        }
+
+        .window-content p {
+            color: #ffffff;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 16px;
+            font-family: 'MS Sans Serif', Arial, sans-serif;
+        }
+
+        .window-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 2px solid #808080;
+            background: #000000;
+        }
+
+        .window-content ul li {
+            padding: 12px 16px;
+            border-bottom: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            font-family: 'VT323', monospace;
+            position: relative;
+        }
+
+        .window-content ul li::before {
+            content: '>';
+            position: absolute;
+            left: 4px;
+            opacity: 0;
+            transition: all 0.2s ease;
+            color: #ffffff;
+        }
+
+        .window-content ul li:hover {
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 24px;
+        }
+
+        .window-content ul li:hover::before {
+            opacity: 1;
+        }
+
+        .window-content ul li:last-child {
+            border-bottom: none;
+        }
+
+        .window-content div[style*="background: white"] {
+            background: #8B4513 !important;
+            border: 2px solid #ff0000 !important;
+            box-shadow: 
+                inset 0 0 10px rgba(255, 0, 0, 0.3),
+                0 0 20px rgba(255, 0, 0, 0.2);
+            padding: 20px !important;
+            image-rendering: pixelated;
+        }
+
+        .window-content div[style*="background: white"]:hover {
+            box-shadow: 
+                inset 0 0 15px rgba(255, 0, 0, 0.4),
+                0 0 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .window-content img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .system-info {
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 35px;
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            z-index: 9999;
+            box-shadow: 
+                0 -5px 15px rgba(255, 255, 255, 0.1),
+                0 -2px 5px rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .start-button {
+            height: 28px;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            cursor: pointer;
+            font-family: 'VT323', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            animation: scanline 2s linear infinite;
+        }
+
+        .start-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-1px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .start-button:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .start-button:active {
+            background: rgba(255, 0, 0, 0.3);
+            box-shadow: 
+                inset 2px 2px #666666,
+                inset -2px -2px #ff8c00;
+            transform: translateY(0);
+        }
+
+        .start-button .logo {
+            width: 28px !important;
+            height: 28px !important;
+            font-size: 18px !important;
+        }
+
+            @media (max-width: 768px) {
+                body {
+                    touch-action: manipulation;
+                }
+
+                .desktop {
+                    height: calc(100vh - 45px);
+                    padding: 10px;
+                }
+
+                .desktop > div {
+                    display: grid;
+                    grid-template-columns: repeat(4, minmax(0, 1fr));
+                    gap: 2px;
+                    padding: 5px;
+                    height: calc(100vh - 65px);
+                    align-content: start;
+                    justify-items: center;
+                }
+
+                .desktop-icon {
+                    width: 100%;
+                    max-width: 70px;
+                    margin: 0;
+                    padding: 4px;
+                    height: auto;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    background: none;
+                }
+
+                .desktop-icon > div {
+                    width: 60px !important;
+                    height: 60px !important;
+                    font-size: 36px !important;
+                    margin-bottom: 6px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .desktop-icon span {
+                    font-size: 12px;
+                    line-height: 1.3;
+                    text-align: center;
+                    width: 100%;
+                    color: #ff0000;
+                    white-space: normal;
+                    word-wrap: break-word;
+                    padding: 0 4px;
+                }
+
+                .desktop-icon .logo,
+                .desktop-icon div {
+                    width: 48px !important;
+                    height: 48px !important;
+                    font-size: 28px !important;
+                }
+
+            .desktop-icon[onclick="openWindow('trash')"] {
+                position: fixed !important;
+                bottom: 65px !important;
+                right: 20px !important;
+                z-index: 1;
+            }
+
+            .window {
+                width: 95vw !important;
+                left: 2.5vw !important;
+                max-height: 80vh;
+                overflow-y: auto;
+                top: 10px !important;
+            }
+
+            .window-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .window-content > div {
+                width: 100% !important;
+            }
+
+            .window-content {
+                padding: 15px;
+                font-size: 16px;
+            }
+
+            .title-bar {
+                padding: 8px;
+                font-size: 16px;
+            }
+
+        .title-bar-controls button {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #ff8c00;
+            background: #1a1a1a;
+            color: #ff8c00;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            font-family: 'VT323', monospace;
+            text-shadow: none;
+            box-shadow: 
+                inset -2px -2px #666666,
+                inset 2px 2px #ff8c00;
+        }
+
+            .taskbar-tray {
+                font-size: 24px;
+                gap: 20px;
+            }
+
+            .taskbar-item {
+                padding: 8px 12px;
+                font-size: 16px;
+            }
+
+            #clock {
+                font-size: 16px;
+            }
+        }
+
+        .taskbar-divider {
+            width: 2px;
+            height: 28px;
+            background: linear-gradient(to bottom, transparent, #ff8c00, transparent);
+            margin: 0 12px;
+            opacity: 0.8;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+
+        .taskbar-items {
+            display: flex;
+            gap: 3px;
+            flex: 1;
+        }
+
+        .taskbar-item {
+            padding: 4px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            cursor: pointer;
+            font-family: 'VT323', monospace;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .taskbar-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .taskbar-item.active {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .taskbar-item:hover {
+            background: rgba(249, 115, 22, 0.2);
+        }
+
+        .taskbar-item.active {
+            background: rgba(255, 0, 0, 0.3);
+            border-color: #ff0000;
+            box-shadow: 
+                inset 2px 2px #666666,
+                inset -2px -2px #ff0000;
+        }
+
+        .taskbar-item img {
+            width: 16px;
+            height: 16px;
+        }
+
+        .taskbar-tray {
+            border-left: 2px solid #ff8c00;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #000000;
+            text-shadow: none;
+            font-family: 'VT323', monospace;
+        }
+
+        #clock {
+            color: #ffffff;
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            padding: 4px 12px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .tab-container {
+            display: flex;
+            border-bottom: 2px solid #ff8c00;
+            margin-bottom: 10px;
+        }
+
+        .tab {
+            padding: 5px 15px;
+            border: 2px solid #ff8c00;
+            border-bottom: none;
+            margin-right: 2px;
+            cursor: pointer;
+            font-size: 11px;
+            background: #1a1a1a;
+            color: #ff8c00;
+        }
+
+        .tab.active {
+            background: #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            margin-bottom: -1px;
+        }
+
+        .button {
+            padding: 4px 8px;
+            border: none;
+            background: #c0c0c0;
+            color: #000000;
+            font-size: 11px;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+            cursor: pointer;
+            box-shadow: 
+                inset -1px -1px #0a0a0a,
+                inset 1px 1px #ffffff,
+                inset -2px -2px #808080,
+                inset 2px 2px #dfdfdf;
+        }
+
+        .button:active {
+            box-shadow: 
+                inset 1px 1px #0a0a0a,
+                inset -1px -1px #ffffff,
+                inset 2px 2px #808080,
+                inset -2px -2px #dfdfdf;
+        }
+
+        .window-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 4px;
+            margin-top: 8px;
+            padding: 4px;
+            border-top: 1px solid #dfdfdf;
+            border-left: 1px solid #dfdfdf;
+            border-right: 1px solid #808080;
+            border-bottom: 1px solid #808080;
+        }
+    </style>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline loading="eager" style="object-fit: cover !important; width: 100vw !important; height: 100vh !important; position: fixed !important; top: 0 !important; left: 0 !important; z-index: -1 !important; min-width: 100% !important; min-height: 100% !important;">
+        <source src="./DESKTOP.mp4" type="video/mp4" />
+    </video>
+    <video id="mobile-video" autoplay muted loop playsinline loading="eager" style="object-fit: cover !important; width: 100vw !important; height: 100vh !important; position: fixed !important; top: 0 !important; left: 0 !important; z-index: -1 !important; min-width: 100% !important; min-height: 100% !important;">
+        <source src="./MOBILE.mp4" type="video/mp4" />
+    </video>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const desktopVideo = document.getElementById('background-video');
+            const mobileVideo = document.getElementById('mobile-video');
+            
+            // Fonction pour gérer le chargement des vidéos
+            function initVideo(video, name) {
+                // Forcer le chargement immédiat
+                video.load();
+                video.preload = "auto";
+                
+                // Gérer les événements
+                video.addEventListener('loadedmetadata', () => {
+                    console.log(name + ' metadata loaded');
+                    video.play().catch(e => {
+                        console.error(name + ' play error:', e);
+                        // Réessayer la lecture après un court délai
+                        setTimeout(() => {
+                            video.play().catch(e => console.error(name + ' retry play error:', e));
+                        }, 1000);
+                    });
+                });
+                
+                video.addEventListener('error', (e) => {
+                    console.error(name + ' error:', e);
+                    if (video.error) {
+                        console.error('Error code:', video.error.code);
+                        console.error('Error message:', video.error.message);
+                        // Recharger la vidéo en cas d'erreur
+                        video.load();
+                    }
+                });
+                
+                // Vérifier si la vidéo est déjà chargée
+                if (video.readyState >= 2) {
+                    console.log(name + ' already loaded');
+                    video.play().catch(e => console.error(name + ' play error:', e));
+                }
+                
+                // Forcer la lecture périodiquement si la vidéo est en pause
+                setInterval(() => {
+                    if (video.paused) {
+                        video.play().catch(e => console.error(name + ' periodic play error:', e));
+                    }
+                }, 5000);
+            }
+            
+            // Initialiser les vidéos
+            initVideo(desktopVideo, 'Desktop');
+            initVideo(mobileVideo, 'Mobile');
+            
+            // Gérer l'affichage mobile/desktop
+            function handleResize() {
+                if (window.innerWidth <= 768) {
+                    desktopVideo.style.display = 'none';
+                    mobileVideo.style.display = 'block';
+                } else {
+                    desktopVideo.style.display = 'block';
+                    mobileVideo.style.display = 'none';
+                }
+            }
+            
+            // Appliquer au chargement et sur redimensionnement
+            handleResize();
+            window.addEventListener('resize', handleResize);
+        });
+    </script>
+    <div id="loading-screen">
+        <div class="windows-logo">ANTI-META OS</div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="loading-text">Starting Anti-META OS...</div>
+        <div id="meta-question" style="display: none; margin-top: 30px; text-align: center;">
+            <h2 style="font-size: 36px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">DO YOU NEED META?</h2>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <button onclick="rejectUser()" style="padding: 15px 30px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-size: 18px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;">YES, I NEED</button>
+                <button onclick="acceptUser()" style="padding: 15px 30px; background: rgba(0, 255, 0, 0.3); border: 2px solid #00ff00; color: #ffffff; font-size: 18px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;">NO, WE ARE META</button>
+            </div>
+        </div>
+    </div>
+    <div class="desktop">
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; height: calc(100vh - 85px); align-content: flex-start;">
+            <div class="desktop-icon" onclick="openWindow('about')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 48px;">i</div>
+                <span>Information</span>
+            </div>
+            
+            <div class="desktop-icon" onclick="openWindow('roadmap')">
+                <div style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 48px;">⚡</div>
+                <span>Road Map</span>
+            </div>
+            
+            <div class="desktop-icon" onclick="openWindow('tokenomics')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">🔥</div>
+                <span>Antinomic</span>
+            </div>
+            
+            <div class="desktop-icon" onclick="openWindow('vision')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">⚔️</div>
+                <span>Manifesto</span>
+            </div>
+            
+            <div class="desktop-icon" onclick="window.open('https://twitter.com/WeAreMetaSOL', '_blank')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ffffff; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">𝕏</div>
+                <span>Twitter</span>
+            </div>
+            
+            <div class="desktop-icon" onclick="window.open('https://t.me/ANTIMETA_AM', '_blank')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ffffff; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">📱</div>
+                <span>Telegram</span>
+            </div>
+            
+            <div class="desktop-icon" onclick="openWindow('chart')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">📊</div>
+                <span>Anti Chart</span>
+            </div>
+
+            <div class="desktop-icon" onclick="openWindow('games')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">🎮</div>
+                <span>ANTI GAMES</span>
+            </div>
+
+            <div class="desktop-icon" onclick="openWindow('calculator')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">⚡</div>
+                <span>War Calc</span>
+            </div>
+
+            <div class="desktop-icon" onclick="openWindow('notepad')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">📡</div>
+                <span>War Log</span>
+            </div>
+
+            <div class="desktop-icon" onclick="openWindow('agents')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">🤖</div>
+                <span>ANTI AGENTS</span>
+            </div>
+
+            <div class="desktop-icon" onclick="openWindow('chat')">
+                <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 36px;">💬</div>
+                <span>ANTI CHAT</span>
+            </div>
+
+            <div class="desktop-icon" onclick="openWindow('trash')" style="position: fixed; bottom: 65px; right: 20px;">
+                <div class="logo" style="width: 72px; height: 72px; background: #000000; border: 3px solid #ff0000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 48px;">☠️</div>
+                <span>META Graveyard</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="start-menu" id="start-menu" style="display: none; position: fixed; bottom: 35px; left: 0; width: 300px; height: calc(100vh - 35px); background: rgba(0, 0, 0, 0.98); border-right: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); z-index: 10000;">
+        <div style="padding: 15px;">
+            <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 15px; position: relative;">
+                <div class="logo" style="width: 48px; height: 48px; background: #000000; border: 2px solid #ffffff; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 28px; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: shine 2s infinite;"></div>
+                    M
+                </div>
+                <span style="font-size: 20px; font-weight: bold; color: #ffffff; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 10px rgba(255,255,255,0.5); font-family: 'VT323', monospace;">WE ARE META</span>
+                <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite;"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button onclick="openWindow('about')" style="text-align: left; padding: 12px 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-size: 14px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease;">About</button>
+                <style>
+        .start-menu {
+            background: rgba(0, 0, 0, 0.98);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            animation: slideIn 0.3s ease-out;
+            transform-origin: bottom left;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .start-menu button {
+            text-align: left;
+            padding: 15px 20px;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            font-family: 'VT323', monospace;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .start-menu button:hover {
+            background: rgba(255, 0, 0, 0.2);
+            padding-left: 30px;
+        }
+        
+        .start-menu button:active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(2px);
+        }
+
+        .start-menu button::before {
+            content: '>';
+            position: absolute;
+            left: 5px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .start-menu button:hover::before {
+            opacity: 1;
+            left: 8px;
+        }
+                </style>
+                <button onclick="openWindow('roadmap')" style="text-align: left; padding: 12px 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-size: 14px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease;">Battle Plan</button>
+                <button onclick="openWindow('tokenomics')" style="text-align: left; padding: 12px 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-size: 14px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease;">War Economy</button>
+                <button onclick="openWindow('vision')" style="text-align: left; padding: 12px 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-size: 14px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease;">Manifesto</button>
+                
+                <div style="height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); margin: 15px 0; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: shine 2s infinite;"></div>
+                </div>
+                
+                <button onclick="window.open('https://twitter.com/WeAreMetaSOL', '_blank')" style="text-align: left; padding: 12px 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-size: 14px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease;">𝕏 Twitter</button>
+                <button onclick="window.open('https://t.me/ANTIMETA_AM', '_blank')" style="text-align: left; padding: 12px 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-size: 14px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease;">📱 Telegram</button>
+                <button onclick="openWindow('chart')" style="text-align: left; padding: 12px 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-size: 14px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease;">📊 Chart</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="taskbar">
+        <button class="start-button" onclick="toggleStartMenu()">
+            <div class="logo" style="width: 24px; height: 24px; background: #ffffff; border: 2px solid #ffffff; color: #000000; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px;">M</div>
+            <span>WE ARE META</span>
+        </button>
+        
+        <div class="taskbar-divider"></div>
+        
+        <div class="taskbar-items">
+            <!-- Filled dynamically by JavaScript -->
+        </div>
+        
+        <div class="taskbar-tray" style="position: relative;">
+            <button onclick="window.open('https://twitter.com/WeAreMetaSOL', '_blank')" style="padding: 8px 12px; border: 1px solid rgba(255, 0, 0, 0.3); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease; overflow: hidden; clip-path: polygon(10% 0, 90% 0, 100% 30%, 100% 70%, 90% 100%, 10% 100%, 0 70%, 0 30%);" onmouseover="this.style.boxShadow='0 0 15px rgba(255,0,0,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='none'; this.style.transform='translateY(0)'">
+                <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                    𝕏
+                <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+            </button>
+            <button onclick="window.open('https://t.me/ANTIMETA_AM', '_blank')" style="padding: 8px 12px; border: 1px solid rgba(255, 0, 0, 0.3); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease; overflow: hidden; clip-path: polygon(10% 0, 90% 0, 100% 30%, 100% 70%, 90% 100%, 10% 100%, 0 70%, 0 30%);" onmouseover="this.style.boxShadow='0 0 15px rgba(255,0,0,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='none'; this.style.transform='translateY(0)'">
+                <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                    📱
+                <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+            </button>
+            <button onclick="openWindow('chart')" style="padding: 8px 12px; border: 1px solid rgba(255, 0, 0, 0.3); background: rgba(0, 0, 0, 0.8); color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; transition: all 0.3s ease; overflow: hidden; clip-path: polygon(10% 0, 90% 0, 100% 30%, 100% 70%, 90% 100%, 10% 100%, 0 70%, 0 30%);" onmouseover="this.style.boxShadow='0 0 15px rgba(255,0,0,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='none'; this.style.transform='translateY(0)'">
+                <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                📊
+                <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+            </button>
+            <span id="clock" style="position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite;"></div>
+                12:00
+                <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite 1s;"></div>
+            </span>
+        </div>
+    </div>
+
+    <script>
+        const windowContents = {
+            about: `
+                <div style="max-width: 600px;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 20px; position: relative;">
+                        <div class="logo" style="width: 64px; height: 64px; background: #000000; border: 2px solid #ffffff; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 32px; position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: shine 2s infinite;"></div>
+                            M
+                        </div>
+                        <div>
+                            <h2 style="font-size: 24px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">About ANTI-META </h2>
+                            <p style="text-transform: uppercase; letter-spacing: 1px;">The Anti-META Revolution ⚔️</p>
+                        </div>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.8); padding: 16px; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite;"></div>
+                            <div style="margin-bottom: 25px; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; line-height: 1.6;">
+                                We are the vanguard of the Anti-META revolution. In a space plagued by copycat projects and scams, we rise against those who exploit the META trend for quick profits. We've witnessed too many projects that simply copy and paste, deceiving users and damaging the ecosystem.<br><br>
+                                Our mission is clear: to restore order and protect our community. Through our advanced AI agents, we're developing tools to identify scams, detect copycat projects, and help users make informed decisions.<br><br>
+                                This isn't just another project - it's a movement to cleanse the space of harmful META clones and establish a new standard of authenticity.
+                            </div>
+                            <h3 style="margin-bottom: 15px; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Token Details</h3>
+                        <ul style="list-style: none; color: #ffffff; position: relative;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">⚔️ Mission: Anti-META Movement</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">💫 Network: Solana</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">💎 Total Supply: 1,000,000,000</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">🔒 LP: 100% burnt</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">💰 Tax: 0/0</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">🎯 Distribution: Fair launch</li>
+                            <li style="padding: 8px 0; transition: all 0.3s ease;">⚡ Features: Anti-Bot, Anti-Whale</li>
+                        </ul>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                    </div>
+                </div>
+
+                <style>
+                    @keyframes shine {
+                        0% { left: -100%; }
+                        100% { left: 100%; }
+                    }
+                    
+                    .window-content ul li:hover {
+                        background: rgba(255,255,255,0.05);
+                        padding-left: 16px;
+                        border-color: rgba(255,255,255,0.3);
+                    }
+                </style>
+            `,
+            roadmap: `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Battle Plan ⚔️</h2>
+                    <div style="background: rgba(0,0,0,0.8); padding: 16px; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite;"></div>
+                        
+                        <div style="margin-bottom: 25px; position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Phase I: Initial Strike 🚀</h3>
+                            <ul style="list-style: none;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">• Launch of the official website</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">• Strategic advertising campaigns for an initial boost</li>
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">• Organization of the first activities on Telegram to gather an engaged community</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px; position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Phase II: Territory Expansion 📊</h3>
+                            <ul style="list-style: none;">
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">• Strengthening our presence in crypto trends to expand our influence</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px; position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Phase III: Digital Warfare 📱</h3>
+                            <ul style="list-style: none;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">• Digital offensive via TikTok, X (Twitter), and targeted campaigns with influencers (KOLs) and callers</li>
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">• Creating massive buzz on social media to draw attention</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px; position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Phase IV: Strategic Alliance 🎯</h3>
+                            <ul style="list-style: none;">
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">• Forming strategic alliances to amplify our presence</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px; position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Phase V: Global Dominance 🌐</h3>
+                            <ul style="list-style: none;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">• Launching collaborative marketing campaigns (Brother Marketing Campaigns) to consolidate our empire</li>
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">• Enhancing our activities to deploy our influence globally</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px; position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Phase VI: META Revolution ⚔️</h3>
+                            <ul style="list-style: none;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">• Expanding our collaborative campaigns</li>
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">• Creating a global Anti-META movement to revolutionize the ecosystem</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Phase VII: Ultimate Victory 🏆</h3>
+                            <ul style="list-style: none;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">• Official launch</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">• Development of an Anti-META artificial intelligence</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">• Establishing a decentralized resistance network</li>
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">• Official launch of the global Anti-META movement to rewrite the rules</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                    </div>
+                </div>
+            `,
+            tokenomics: `
+                <div style="max-width: 600px;">
+                    <h2 style="font-size: 24px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">War Economy 📊</h2>
+                    <div style="background: rgba(0,0,0,0.8); padding: 16px; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite;"></div>
+                        <div style="margin-bottom: 20px; position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Strategic Distribution</h3>
+                            <ul style="color: #ffffff;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">80% - Liquidity Pool</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">10% - Marketing</li>
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">10% - Team</li>
+                            </ul>
+                        </div>
+                        <div style="position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <h3 style="color: #ffffff; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Defensive Measures</h3>
+                            <ul style="color: #ffffff;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">⚔️ Anti-META Shield</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">🛡️ Anti-Bot Defense</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">🔒 Liquidity Fortress</li>
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">⚡ Fair Launch Protocol</li>
+                            </ul>
+                        </div>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                    </div>
+                </div>
+            `,
+            vision: `
+                <div style="max-width: 600px;">
+                    <h2 style="font-size: 24px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Manifesto ⚔️</h2>
+                    <div style="background: rgba(0,0,0,0.8); padding: 16px; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite;"></div>
+                        <div style="position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); margin-bottom: 20px;">
+                            <p style="margin-bottom: 20px; color: #ffffff; text-shadow: 0 0 5px rgba(255,255,255,0.2); letter-spacing: 1px;">
+                                We stand as the vanguard against the mindless conformity of META culture. In a space plagued by copycat tokens and trend-chasing projects, we emerge as the resistance.
+                            </p>
+                        </div>
+                        
+                        <div style="position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); margin-bottom: 20px;">
+                            <h3 style="color: #ffffff; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Battle Doctrine</h3>
+                            <ul style="color: #ffffff;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">⚔️ Anti-META Revolution</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">💪 Community Sovereignty</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">🎯 Strategic Innovation</li>
+                                <li style="padding: 8px 0; transition: all 0.3s ease;">⚡ Decentralized Resistance</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="position: relative; padding: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5);">
+                            <p style="color: #ffffff; text-shadow: 0 0 5px rgba(255,255,255,0.2); letter-spacing: 1px; text-transform: uppercase;">
+                                Join the resistance. Break free from the META. The revolution has begun! ⚔️
+                            </p>
+                        </div>
+                        
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                    </div>
+                </div>
+            `,
+            notepad: `
+                <div style="max-width: 600px;">
+                    <div style="background: #c0c0c0; padding: 8px; border: none; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;">
+                        <textarea id="notepadText" style="width: 100%; height: 400px; margin-bottom: 10px; padding: 10px; background: #000; color: #ff8c00; border: 2px solid #ff8c00; font-family: 'VT323', monospace; font-size: 16px; resize: none;"></textarea>
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="saveNotepad()" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">Save</button>
+                            <button onclick="clearNotepad()" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            calculator: `
+                <div style="max-width: 300px;">
+                    <div style="background: #c0c0c0; padding: 8px; border: none; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;">
+                        <input type="text" id="calcDisplay" readonly style="width: 100%; margin-bottom: 10px; padding: 4px 8px; background: #ffffff; color: #000000; border: none; font-family: 'MS Sans Serif', Arial, sans-serif; font-size: 14px; text-align: right; box-shadow: inset 1px 1px #808080, inset -1px -1px #dfdfdf;">
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;">
+                            <button onclick="appendToCalc('7')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">7</button>
+                            <button onclick="appendToCalc('8')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">8</button>
+                            <button onclick="appendToCalc('9')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">9</button>
+                            <button onclick="appendToCalc('/')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">/</button>
+                            <button onclick="appendToCalc('4')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">4</button>
+                            <button onclick="appendToCalc('5')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">5</button>
+                            <button onclick="appendToCalc('6')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">6</button>
+                            <button onclick="appendToCalc('*')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">*</button>
+                            <button onclick="appendToCalc('1')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">1</button>
+                            <button onclick="appendToCalc('2')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">2</button>
+                            <button onclick="appendToCalc('3')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">3</button>
+                            <button onclick="appendToCalc('-')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">-</button>
+                            <button onclick="appendToCalc('0')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">0</button>
+                            <button onclick="appendToCalc('.')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">.</button>
+                            <button onclick="calculateResult()" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">=</button>
+                            <button onclick="appendToCalc('+')" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">+</button>
+                            <button onclick="clearCalc()" style="padding: 8px; border: none; background: #c0c0c0; color: #000000; cursor: pointer; font-family: 'MS Sans Serif', Arial, sans-serif; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf; grid-column: span 4;" onmousedown="this.style.boxShadow='inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf'" onmouseup="this.style.boxShadow='inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            games: `
+                <div style="max-width: 800px; text-align: center;">
+                    <h2 style="color: #ff0000; margin-bottom: 20px; font-family: 'VT323', monospace; font-size: 24px;">SELECT YOUR MISSION</h2>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px;">
+                        <div onclick="openWindow('shooter')" style="cursor: pointer; padding: 20px; border: 2px solid #ff0000; background: rgba(0,0,0,0.8);">
+                            <div style="font-size: 36px; margin-bottom: 10px;">🎯</div>
+                            <h3 style="color: #ff0000; margin-bottom: 10px;">META SHOOTER</h3>
+                            <p style="color: #ffffff; font-size: 14px;">Destroy META ships in this classic shooter game</p>
+                        </div>
+                        <div onclick="openWindow('platform')" style="cursor: pointer; padding: 20px; border: 2px solid #ff0000; background: rgba(0,0,0,0.8);">
+                            <div style="font-size: 36px; margin-bottom: 10px;">🏃</div>
+                            <h3 style="color: #ff0000; margin-bottom: 10px;">META RUNNER</h3>
+                            <p style="color: #ffffff; font-size: 14px;">Navigate through obstacles in this platformer</p>
+                        </div>
+                        <div onclick="openWindow('puzzle')" style="cursor: pointer; padding: 20px; border: 2px solid #ff0000; background: rgba(0,0,0,0.8);">
+                            <div style="font-size: 36px; margin-bottom: 10px;">🧩</div>
+                            <h3 style="color: #ff0000; margin-bottom: 10px;">META PUZZLE</h3>
+                            <p style="color: #ffffff; font-size: 14px;">Solve puzzles to dismantle the META network</p>
+                        </div>
+                        <div onclick="openWindow('snake')" style="cursor: pointer; padding: 20px; border: 2px solid #ff0000; background: rgba(0,0,0,0.8);">
+                            <div style="font-size: 36px; margin-bottom: 10px;">⚔️</div>
+                            <h3 style="color: #ff0000; margin-bottom: 10px;">META INVADERS</h3>
+                            <p style="color: #ffffff; font-size: 14px;">Classic space invaders with a META twist</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            shooter: `
+                <div style="max-width: 800px; text-align: center;">
+                    <canvas id="shooterCanvas" width="400" height="500" style="border: 2px solid #ff0000; background: #000000;"></canvas>
+                    <div style="margin-top: 20px;">
+                        <p style="font-family: 'VT323', monospace; color: #ffffff; background: rgba(0,0,0,0.8); padding: 8px; border: 1px solid #ff0000;">
+                            SCORE: <span id="shooterScore" style="color: #ff0000;">0</span>
+                        </p>
+                        <button onclick="startShooterGame()" style="margin-top: 10px; padding: 8px 20px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-size: 18px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;">START MISSION</button>
+                    </div>
+                </div>
+            `,
+            platform: `
+                <div style="max-width: 800px; text-align: center;">
+                    <canvas id="platformCanvas" width="800" height="400" style="border: 2px solid #ff0000; background: #000000;"></canvas>
+                    <div style="margin-top: 20px;">
+                        <p style="font-family: 'VT323', monospace; color: #ffffff; background: rgba(0,0,0,0.8); padding: 8px; border: 1px solid #ff0000;">
+                            DISTANCE: <span id="platformScore" style="color: #ff0000;">0</span>m
+                        </p>
+                        <button onclick="startPlatformGame()" style="margin-top: 10px; padding: 8px 20px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-size: 18px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;">START MISSION</button>
+                    </div>
+                </div>
+            `,
+            puzzle: `
+                <div style="max-width: 800px; text-align: center;">
+                    <canvas id="puzzleCanvas" width="400" height="400" style="border: 2px solid #ff0000; background: #000000;"></canvas>
+                    <div style="margin-top: 20px;">
+                        <p style="font-family: 'VT323', monospace; color: #ffffff; background: rgba(0,0,0,0.8); padding: 8px; border: 1px solid #ff0000;">
+                            MOVES: <span id="puzzleMoves" style="color: #ff0000;">0</span>
+                        </p>
+                        <button onclick="startPuzzleGame()" style="margin-top: 10px; padding: 8px 20px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-size: 18px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;">START MISSION</button>
+                    </div>
+                </div>
+            `,
+            chat: `
+                <div style="max-width: 800px; height: 500px; display: flex; flex-direction: column;">
+                    <div id="chat-login" style="text-align: center; padding: 20px;">
+                        <h2 style="color: #ff0000; margin-bottom: 20px; font-family: 'VT323', monospace;">ENTER THE BATTLEFIELD</h2>
+                        <div style="margin-bottom: 20px;">
+                            <input type="text" id="username-input" placeholder="Enter your codename..." style="width: 300px; padding: 10px; background: #000000; border: 2px solid #ff0000; color: #ff0000; font-family: 'VT323', monospace; font-size: 18px;">
+                        </div>
+                        <button onclick="joinChat()" style="padding: 10px 20px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-size: 18px; font-family: 'VT323', monospace; cursor: pointer;">JOIN CHAT</button>
+                    </div>
+                    <div id="chat-main" style="display: none; flex-direction: column; height: 100%;">
+                        <div id="chat-messages" style="flex-grow: 1; background: #000000; border: 2px solid #ff0000; padding: 10px; margin-bottom: 10px; overflow-y: auto; font-family: 'VT323', monospace; color: #00ff00;">
+                            <div style="color: #ff0000;">[SYSTEM] Welcome to the Anti-META Command Center</div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="message-input" placeholder="Type your message..." style="flex-grow: 1; padding: 10px; background: #000000; border: 2px solid #ff0000; color: #ff0000; font-family: 'VT323', monospace; font-size: 16px;">
+                            <button onclick="sendMessage()" style="padding: 10px 20px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-family: 'VT323', monospace; cursor: pointer;">SEND</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            trash: `
+                <div style="max-width: 600px; text-align: center;">
+                    <div style="font-size: 72px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,255,255,0.5);">⚔️</div>
+                    <h2 style="font-size: 24px; margin-bottom: 20px; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">META is dead, WE ARE META lives!</h2>
+                    <div style="background: rgba(0,0,0,0.8); padding: 16px; border: 1px solid rgba(255,255,255,0.2); text-align: left; position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite;"></div>
+                        <p style="line-height: 1.8; font-size: 16px; color: #ffffff; text-shadow: 0 0 5px rgba(255,255,255,0.2); letter-spacing: 1px; text-transform: uppercase; text-align: center;">
+                            We stand against the blind pursuit of trends. We are the rebellion, defying the META culture that suffocates the memecoin world.<br><br>
+                            Our mission is clear: to break free from the chains of conformity and challenge the norms that stifle creativity and innovation.<br><br>
+                            The revolution isn't coming—it's already here. ⚔️<br><br>
+                            <span style="font-size: 20px; font-weight: bold;">⚔️ WE ARE META - JOIN US ⚔️</span>
+                        </p>
+                        <button onclick="window.open('https://t.me/ANTIMETA_AM', '_blank')" style="width: 100%; margin-top: 20px; padding: 15px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-size: 18px; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                            JOIN ANTI-META ARMY⚔️
+                            <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                        </button>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                    </div>
+                </div>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                    </div>
+                </div>
+            `,
+            agents: `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 28px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 15px rgba(255,0,0,0.7); text-align: center; color: #ff0000;">ANTI-META AGENTS ⚔️</h2>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 25px;">
+                        <div style="background: rgba(0,0,0,0.9); padding: 25px; border: 2px solid #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(255,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(255,0,0,0.2)'">
+                            <h3 style="color: #ff0000; margin-bottom: 15px; font-size: 24px; text-shadow: 0 0 10px rgba(255,0,0,0.5); text-align: center;">🔍 AGENT ANTI-RUG</h3>
+                            <p style="color: #ffffff; margin-bottom: 20px; font-size: 16px; line-height: 1.6; text-align: center;">Analyzes projects to detect potential rug pulls before they happen.</p>
+                            <div style="text-align: center;">
+                                <button style="padding: 12px 30px; background: rgba(255, 0, 0, 0.2); border: 2px solid #ff0000; color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.background='rgba(255, 0, 0, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'; this.style.transform='translateY(0)'">
+                                    <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                                    SOON
+                                    <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(0,0,0,0.9); padding: 25px; border: 2px solid #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(255,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(255,0,0,0.2)'">
+                            <h3 style="color: #ff0000; margin-bottom: 15px; font-size: 24px; text-shadow: 0 0 10px rgba(255,0,0,0.5); text-align: center;">📦 AGENT ANTI-BUNDLE</h3>
+                            <p style="color: #ffffff; margin-bottom: 20px; font-size: 16px; line-height: 1.6; text-align: center;">Identifies whether a project is part of a bundle scam.</p>
+                            <div style="text-align: center;">
+                                <button style="padding: 12px 30px; background: rgba(255, 0, 0, 0.2); border: 2px solid #ff0000; color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.background='rgba(255, 0, 0, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'; this.style.transform='translateY(0)'">
+                                    <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                                    SOON
+                                    <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(0,0,0,0.9); padding: 25px; border: 2px solid #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(255,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(255,0,0,0.2)'">
+                            <h3 style="color: #ff0000; margin-bottom: 15px; font-size: 24px; text-shadow: 0 0 10px rgba(255,0,0,0.5); text-align: center;">✅ AGENT ANTI-CHECK</h3>
+                            <p style="color: #ffffff; margin-bottom: 20px; font-size: 16px; line-height: 1.6; text-align: center;">Verifies if X (Twitter) accounts are being reused for multiple scams.</p>
+                            <div style="text-align: center;">
+                                <button style="padding: 12px 30px; background: rgba(255, 0, 0, 0.2); border: 2px solid #ff0000; color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.background='rgba(255, 0, 0, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'; this.style.transform='translateY(0)'">
+                                    <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                                    SOON
+                                    <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(0,0,0,0.9); padding: 25px; border: 2px solid #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(255,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(255,0,0,0.2)'">
+                            <h3 style="color: #ff0000; margin-bottom: 15px; font-size: 24px; text-shadow: 0 0 10px rgba(255,0,0,0.5); text-align: center;">🔗 AGENT ANTI-SCRAPER</h3>
+                            <p style="color: #ffffff; margin-bottom: 20px; font-size: 16px; line-height: 1.6; text-align: center;">Extracts contract addresses (CA) from X accounts in real-time.</p>
+                            <div style="text-align: center;">
+                                <button style="padding: 12px 30px; background: rgba(255, 0, 0, 0.2); border: 2px solid #ff0000; color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.background='rgba(255, 0, 0, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'; this.style.transform='translateY(0)'">
+                                    <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                                    SOON
+                                    <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(0,0,0,0.9); padding: 25px; border: 2px solid #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(255,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(255,0,0,0.2)'">
+                            <h3 style="color: #ff0000; margin-bottom: 15px; font-size: 24px; text-shadow: 0 0 10px rgba(255,0,0,0.5); text-align: center;">🤖 AGENT ANTI-BOT</h3>
+                            <p style="color: #ffffff; margin-bottom: 20px; font-size: 16px; line-height: 1.6; text-align: center;">Detects if a project is artificially inflated with bots.</p>
+                            <div style="text-align: center;">
+                                <button style="padding: 12px 30px; background: rgba(255, 0, 0, 0.2); border: 2px solid #ff0000; color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.background='rgba(255, 0, 0, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'; this.style.transform='translateY(0)'">
+                                    <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                                    SOON
+                                    <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(0,0,0,0.9); padding: 25px; border: 2px solid #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(255,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(255,0,0,0.2)'">
+                            <h3 style="color: #ff0000; margin-bottom: 15px; font-size: 24px; text-shadow: 0 0 10px rgba(255,0,0,0.5); text-align: center;">🕵️ AGENT X-RUG-DETECT</h3>
+                            <p style="color: #ffffff; margin-bottom: 20px; font-size: 16px; line-height: 1.6; text-align: center;">Uses AI to post and comment about potential rug pulls.</p>
+                            <div style="text-align: center;">
+                                <button style="padding: 12px 30px; background: rgba(255, 0, 0, 0.2); border: 2px solid #ff0000; color: #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.background='rgba(255, 0, 0, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'; this.style.transform='translateY(0)'">
+                                    <div style="position: absolute; top: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite;"></div>
+                                    SOON
+                                    <div style="position: absolute; bottom: 0; left: -100%; width: 200%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); animation: scanline 2s linear infinite 1s;"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            chat: `
+                <div style="max-width: 800px; height: 500px; display: flex; flex-direction: column;">
+                    <div id="chat-login" style="text-align: center; padding: 20px;">
+                        <h2 style="color: #ff0000; margin-bottom: 20px; font-family: 'VT323', monospace;">ENTER THE BATTLEFIELD</h2>
+                        <div style="margin-bottom: 20px;">
+                            <input type="text" id="username-input" placeholder="Enter your codename..." style="width: 300px; padding: 10px; background: #000000; border: 2px solid #ff0000; color: #ff0000; font-family: 'VT323', monospace; font-size: 18px;">
+                        </div>
+                        <button onclick="joinChat()" style="padding: 10px 20px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-size: 18px; font-family: 'VT323', monospace; cursor: pointer;">JOIN CHAT</button>
+                    </div>
+                    <div id="chat-main" style="display: none; flex-direction: column; height: 100%;">
+                        <div id="chat-messages" style="flex-grow: 1; background: #000000; border: 2px solid #ff0000; padding: 10px; margin-bottom: 10px; overflow-y: auto; font-family: 'VT323', monospace; color: #00ff00;">
+                            <div style="color: #ff0000;">[SYSTEM] Welcome to the Anti-META Command Center</div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="message-input" placeholder="Type your message..." style="flex-grow: 1; padding: 10px; background: #000000; border: 2px solid #ff0000; color: #ff0000; font-family: 'VT323', monospace; font-size: 16px;">
+                            <button onclick="sendMessage()" style="padding: 10px 20px; background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ffffff; font-family: 'VT323', monospace; cursor: pointer;">SEND</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            chart: `
+                <div style="width: 100%; height: 100%; display: flex; flex-direction: column; background: #000;">
+                    <div style="text-align: center; padding: 10px;">
+                        <h2 style="color: #ff0000; font-size: 24px;">Anti-Meta Chart</h2>
+                    </div>
+                    <div style="flex: 1; min-height: 0;">
+                        <iframe 
+                            src="https://dexscreener.com/solana/3pn6qn28ufsthxwg8jnkzvexe65q6rgyrzccieikh3z6?embed=1&theme=dark" 
+                            style="width: 100%; height: 100%; border: none;"
+                        ></iframe>
+                    </div>
+                </div>
+            `
+        };
+
+        let windows = {};
+        let activeWindow = null;
+        let isDragging = false;
+        let dragOffset = { x: 0, y: 0 };
+
+        function createWindow(id) {
+            const windowEl = document.createElement('div');
+            windowEl.className = 'window';
+            
+            // Si c'est la fenêtre chart, on la met en plein écran
+            if (id === 'chart') {
+                windowEl.style.left = '0';
+                windowEl.style.top = '0';
+                windowEl.style.width = '100%';
+                windowEl.style.height = 'calc(100vh - 45px)';
+            } else {
+                windowEl.style.left = `${Math.random() * (window.innerWidth - 400)}px`;
+                windowEl.style.top = `${Math.random() * (window.innerHeight - 300)}px`;
+            }
+            
+            windowEl.innerHTML = `
+                <div class="title-bar">
+                    <div class="title-bar-text">
+                        <div class="logo" style="width: 24px; height: 24px; background: white; color: #ff0000; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px;">M</div>
+                        ${id === 'snake' ? 'Kill Game' : id.charAt(0).toUpperCase() + id.slice(1)}
+                    </div>
+                    <div class="title-bar-controls">
+                        <button onclick="minimizeWindow('${id}')">_</button>
+                        <button onclick="maximizeWindow('${id}')">□</button>
+                        <button onclick="closeWindow('${id}')">×</button>
+                    </div>
+                </div>
+                <div class="window-content">
+                    ${windowContents[id]}
+                </div>
+            `;
+
+            document.body.appendChild(windowEl);
+            windows[id] = windowEl;
+            
+            makeWindowDraggable(windowEl, id);
+            setActiveWindow(id);
+            updateTaskbar();
+        }
+
+        function minimizeWindow(id) {
+            windows[id].style.display = 'none';
+            updateTaskbar();
+        }
+
+        function maximizeWindow(id) {
+            const win = windows[id];
+            win.style.left = '0';
+            win.style.top = '0';
+            win.style.width = '100%';
+            win.style.height = 'calc(100vh - 45px)';
+            setActiveWindow(id);
+        }
+
+        function restoreWindow(id) {
+            windows[id].style.display = 'block';
+            setActiveWindow(id);
+            updateTaskbar();
+        }
+
+        function closeWindow(id) {
+            document.body.removeChild(windows[id]);
+            delete windows[id];
+            if (activeWindow === id) {
+                activeWindow = null;
+            }
+            updateTaskbar();
+        }
+
+        function makeWindowDraggable(windowEl, id) {
+            const titleBar = windowEl.querySelector('.title-bar');
+            
+            titleBar.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'BUTTON') return;
+                
+                isDragging = true;
+                const rect = windowEl.getBoundingClientRect();
+                dragOffset = {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+                
+                setActiveWindow(id);
+            });
+        }
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging || !activeWindow) return;
+            
+            const win = windows[activeWindow];
+            win.style.left = `${e.clientX - dragOffset.x}px`;
+            win.style.top = `${e.clientY - dragOffset.y}px`;
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+
+        function setActiveWindow(id) {
+            Object.values(windows).forEach(win => win.style.zIndex = '1');
+            if (id && windows[id]) {
+                windows[id].style.zIndex = '100';
+                activeWindow = id;
+            }
+            updateTaskbar();
+        }
+
+        function updateTaskbar() {
+            const taskbarItems = document.querySelector('.taskbar-items');
+            taskbarItems.innerHTML = '';
+            
+            Object.keys(windows).forEach(id => {
+                const isMinimized = windows[id].style.display === 'none';
+                const item = document.createElement('div');
+                item.className = `taskbar-item${activeWindow === id && !isMinimized ? ' active' : ''}`;
+                item.innerHTML = `
+                    <div class="logo" style="width: 16px; height: 16px; background: white; color: #ff0000; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 10px;">M</div>
+                    <span>${id.charAt(0).toUpperCase() + id.slice(1)}</span>
+                `;
+                item.onclick = () => isMinimized ? restoreWindow(id) : setActiveWindow(id);
+                taskbarItems.appendChild(item);
+            });
+        }
+
+        function openWindow(id) {
+            if (windows[id]) {
+                if (windows[id].style.display === 'none') {
+                    restoreWindow(id);
+                } else {
+                    setActiveWindow(id);
+                }
+            } else {
+                createWindow(id);
+            }
+        }
+
+        // Update clock
+        function updateClock() {
+            const clock = document.getElementById('clock');
+            const now = new Date();
+            clock.textContent = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false 
+            });
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Start menu
+        function toggleStartMenu() {
+            const startMenu = document.getElementById('start-menu');
+            startMenu.style.display = startMenu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Close start menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const startMenu = document.getElementById('start-menu');
+            const startButton = document.querySelector('.start-button');
+            if (!startButton.contains(e.target) && !startMenu.contains(e.target)) {
+                startMenu.style.display = 'none';
+            }
+        });
+
+        // User choice functions
+        function rejectUser() {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.innerHTML = '<div style="font-size: 48px; color: #ff0000; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px rgba(255,0,0,0.5);">GOODBYE, META FOLLOWER</div>';
+            setTimeout(() => {
+                window.close();
+            }, 3000);
+        }
+
+        function acceptUser() {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.innerHTML = '<div style="font-size: 48px; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px rgba(255,255,255,0.5); font-family: \'VT323\', monospace;" class="welcome-text"></div>';
+            
+            // Type out "Welcome soldier" with a typing effect
+            const text = "WELCOME SOLDIER";
+            const welcomeText = loadingScreen.querySelector('.welcome-text');
+            let i = 0;
+            const typeSpeed = 100; // Speed of typing in milliseconds
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    welcomeText.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, typeSpeed);
+                } else {
+                    // After typing is complete, fade out and show the site
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        loadingScreen.style.transition = 'opacity 1s ease';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            initializeWindows();
+                        }, 1000);
+                    }, 500); // Wait a bit after typing is complete
+                }
+            }
+            
+            typeWriter(); // Start typing
+        }
+
+        function initializeWindows() {
+            // Ouvrir directement la fenêtre TRASH
+            createWindow('trash');
+            
+            // Positionner la fenêtre TRASH à gauche
+            const trashWindow = windows['trash'];
+            if (trashWindow) {
+                trashWindow.style.left = '50px';
+                trashWindow.style.top = '50px';
+                setActiveWindow('trash');
+                updateTaskbar();
+            }
+        }
+
+        // Loading screen
+        window.addEventListener('load', function() {
+            document.body.style.visibility = 'visible';
+            
+            // Show meta question after progress bar animation
+            setTimeout(() => {
+                const metaQuestion = document.getElementById('meta-question');
+                if (metaQuestion) {
+                    metaQuestion.style.display = 'block';
+                }
+            }, 3000);
+
+            // Initialize windows if no loading screen
+            if (!document.getElementById('loading-screen')) {
+                initializeWindows();
+            }
+        });
+
+        // Make sure body is visible
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.visibility = 'visible';
+            if (!document.getElementById('loading-screen')) {
+                initializeWindows();
+            }
+        });
+
+        // Shooter Game Variables
+        let shooterPlayer = { x: 200, y: 450, width: 40, height: 30 };
+        let shooterBullets = [];
+        let shooterEnemies = [];
+        let shooterScore = 0;
+        let shooterGameActive = false;
+        let shooterInterval;
+
+        function startShooterGame() {
+            if (shooterGameActive) return;
+            
+            shooterPlayer = { x: 200, y: 450, width: 40, height: 30 };
+            shooterBullets = [];
+            shooterEnemies = [];
+            shooterScore = 0;
+            document.getElementById('shooterScore').textContent = shooterScore;
+            
+            if (shooterInterval) clearInterval(shooterInterval);
+            
+            shooterGameActive = true;
+            shooterInterval = setInterval(shooterGameLoop, 1000/60);
+            spawnShooterEnemy();
+        }
+
+        function spawnShooterEnemy() {
+            if (!shooterGameActive) return;
+            
+            const enemy = {
+                x: Math.random() * (400 - 30),
+                y: -30,
+                width: 30,
+                height: 30,
+                speed: Math.random() * 2 + 2
+            };
+            
+            shooterEnemies.push(enemy);
+            setTimeout(spawnShooterEnemy, 1000);
+        }
+
+        function shooterGameLoop() {
+            const canvas = document.getElementById('shooterCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas with gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#000000');
+            gradient.addColorStop(1, '#1a0000');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw player with glow effect
+            ctx.shadowColor = '#ff0000';
+            ctx.shadowBlur = 15;
+            ctx.fillStyle = '#ff0000';
+            
+            // Draw player ship
+            ctx.beginPath();
+            ctx.moveTo(shooterPlayer.x + shooterPlayer.width/2, shooterPlayer.y);
+            ctx.lineTo(shooterPlayer.x + shooterPlayer.width, shooterPlayer.y + shooterPlayer.height);
+            ctx.lineTo(shooterPlayer.x, shooterPlayer.y + shooterPlayer.height);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Add engine glow
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+            ctx.beginPath();
+            ctx.moveTo(shooterPlayer.x + shooterPlayer.width/2, shooterPlayer.y + shooterPlayer.height);
+            ctx.lineTo(shooterPlayer.x + shooterPlayer.width/2 - 10, shooterPlayer.y + shooterPlayer.height + 15);
+            ctx.lineTo(shooterPlayer.x + shooterPlayer.width/2 + 10, shooterPlayer.y + shooterPlayer.height + 15);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.shadowBlur = 0;
+            
+            // Update and draw bullets with laser effect
+            for (let i = shooterBullets.length - 1; i >= 0; i--) {
+                const bullet = shooterBullets[i];
+                bullet.y -= 12; // Increased speed
+                
+                if (bullet.y < 0) {
+                    shooterBullets.splice(i, 1);
+                    continue;
+                }
+                
+                // Draw laser beam
+                ctx.shadowColor = '#ff0000';
+                ctx.shadowBlur = 10;
+                const gradient = ctx.createLinearGradient(bullet.x, bullet.y, bullet.x, bullet.y + 15);
+                gradient.addColorStop(0, '#ffffff');
+                gradient.addColorStop(1, '#ff0000');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(bullet.x - 1, bullet.y, 3, 15);
+                
+                // Add glow effect
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
+                ctx.beginPath();
+                ctx.arc(bullet.x, bullet.y + 7, 5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Check bullet collisions with explosion effect
+                for (let j = shooterEnemies.length - 1; j >= 0; j--) {
+                    const enemy = shooterEnemies[j];
+                    if (bullet.x < enemy.x + enemy.width &&
+                        bullet.x + 4 > enemy.x &&
+                        bullet.y < enemy.y + enemy.height &&
+                        bullet.y + 10 > enemy.y) {
+                        
+                        // Create explosion effect
+                        ctx.shadowColor = '#ff0000';
+                        ctx.shadowBlur = 20;
+                        ctx.fillStyle = '#ff0000';
+                        ctx.beginPath();
+                        ctx.arc(enemy.x + enemy.width/2, enemy.y + enemy.height/2, 20, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // Add particle effect
+                        for (let k = 0; k < 10; k++) {
+                            const angle = (Math.PI * 2 * k) / 10;
+                            const distance = 15;
+                            ctx.beginPath();
+                            ctx.arc(
+                                enemy.x + enemy.width/2 + Math.cos(angle) * distance,
+                                enemy.y + enemy.height/2 + Math.sin(angle) * distance,
+                                3,
+                                0,
+                                Math.PI * 2
+                            );
+                            ctx.fill();
+                        }
+                        
+                        shooterBullets.splice(i, 1);
+                        shooterEnemies.splice(j, 1);
+                        shooterScore += 10;
+                        document.getElementById('shooterScore').textContent = shooterScore;
+                        break;
+                    }
+                }
+            }
+            ctx.shadowBlur = 0;
+            
+            // Update and draw enemies with META theme
+            for (let i = shooterEnemies.length - 1; i >= 0; i--) {
+                const enemy = shooterEnemies[i];
+                enemy.y += enemy.speed;
+                
+                if (enemy.y > canvas.height) {
+                    shooterGameOver();
+                    return;
+                }
+                
+                // Draw enemy with glow effect
+                ctx.shadowColor = '#ff0000';
+                ctx.shadowBlur = 15;
+                
+                // Draw enemy ship body
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.moveTo(enemy.x + enemy.width/2, enemy.y + enemy.height);
+                ctx.lineTo(enemy.x + enemy.width, enemy.y);
+                ctx.lineTo(enemy.x, enemy.y);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Draw META logo
+                ctx.fillStyle = '#ff0000';
+                ctx.font = 'bold 20px VT323';
+                ctx.textAlign = 'center';
+                ctx.fillText('M', enemy.x + enemy.width/2, enemy.y + 20);
+                
+                // Add enemy glow trail
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
+                ctx.beginPath();
+                ctx.moveTo(enemy.x + enemy.width/2, enemy.y);
+                ctx.lineTo(enemy.x + enemy.width/2 - 8, enemy.y - 12);
+                ctx.lineTo(enemy.x + enemy.width/2 + 8, enemy.y - 12);
+                ctx.closePath();
+                ctx.fill();
+                
+                if (enemy.x < shooterPlayer.x + shooterPlayer.width &&
+                    enemy.x + enemy.width > shooterPlayer.x &&
+                    enemy.y < shooterPlayer.y + shooterPlayer.height &&
+                    enemy.y + enemy.height > shooterPlayer.y) {
+                    shooterGameOver();
+                    return;
+                }
+            }
+        }
+
+        function shooterShoot() {
+            if (!shooterGameActive) return;
+            
+            const bullet = {
+                x: shooterPlayer.x + shooterPlayer.width/2 - 2,
+                y: shooterPlayer.y
+            };
+            shooterBullets.push(bullet);
+        }
+
+        function shooterGameOver() {
+            shooterGameActive = false;
+            clearInterval(shooterInterval);
+            alert('Game Over! Score: ' + shooterScore);
+        }
+
+        // Shooter game controls
+        document.addEventListener('mousemove', function(e) {
+            if (!shooterGameActive) return;
+            
+            const canvas = document.getElementById('shooterCanvas');
+            if (!canvas) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            shooterPlayer.x = Math.max(0, Math.min(canvas.width - shooterPlayer.width, x));
+        });
+
+        document.addEventListener('click', function(e) {
+            const canvas = document.getElementById('shooterCanvas');
+            if (!canvas) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                shooterShoot();
+            }
+        });
+        let bullets = [];
+        let enemies = [];
+        let score = 0;
+        let gameInterval;
+        let gameActive = false;
+        
+        // Platform Game
+        let platformPlayer = {
+            x: 50,
+            y: 300,
+            width: 30,
+            height: 30,
+            velocityY: 0,
+            jumping: false
+        };
+        let platforms = [];
+        let platformScore = 0;
+        let platformGameActive = false;
+        let platformInterval;
+
+        function startPlatformGame() {
+            if (platformGameActive) return;
+
+            platformPlayer = {
+                x: 50,
+                y: 300,
+                width: 30,
+                height: 30,
+                velocityY: 0,
+                jumping: false
+            };
+            platforms = [
+                { x: 0, y: 350, width: 800, height: 20 }
+            ];
+            platformScore = 0;
+            platformGameActive = true;
+
+            if (platformInterval) clearInterval(platformInterval);
+            platformInterval = setInterval(platformGameLoop, 1000/60);
+
+            // Generate initial platforms
+            for (let i = 0; i < 5; i++) {
+                generatePlatform();
+            }
+
+            document.getElementById('platformScore').textContent = platformScore;
+        }
+
+        function generatePlatform() {
+            const lastPlatform = platforms[platforms.length - 1];
+            // Ajuster la distance horizontale pour être jouable
+            const minGap = 100; // Distance minimale entre les plateformes
+            const maxGap = 150; // Distance maximale entre les plateformes
+            const gap = minGap + Math.random() * (maxGap - minGap);
+            
+            // Ajuster la hauteur pour être atteignable
+            const minHeight = Math.max(100, lastPlatform.y - 100); // Ne pas aller trop haut
+            const maxHeight = Math.min(350, lastPlatform.y + 50); // Ne pas aller trop bas
+            const y = minHeight + Math.random() * (maxHeight - minHeight);
+            
+            const platform = {
+                x: lastPlatform.x + gap + lastPlatform.width,
+                y: y,
+                width: 70 + Math.random() * 30, // Plateformes plus consistantes
+                height: 20
+            };
+            platforms.push(platform);
+        }
+
+        function platformGameLoop() {
+            const canvas = document.getElementById('platformCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Apply gravity
+            platformPlayer.velocityY += 0.5;
+            platformPlayer.y += platformPlayer.velocityY;
+
+            // Check platform collisions
+            platforms.forEach(platform => {
+                if (platformPlayer.y + platformPlayer.height > platform.y &&
+                    platformPlayer.y < platform.y + platform.height &&
+                    platformPlayer.x + platformPlayer.width > platform.x &&
+                    platformPlayer.x < platform.x + platform.width) {
+                    if (platformPlayer.velocityY > 0) {
+                        platformPlayer.y = platform.y - platformPlayer.height;
+                        platformPlayer.velocityY = 0;
+                        platformPlayer.jumping = false;
+                    }
+                }
+            });
+
+            // Move platforms left
+            platforms.forEach(platform => {
+                platform.x -= 2;
+            });
+
+            // Remove off-screen platforms and generate new ones
+            if (platforms[0].x + platforms[0].width < 0) {
+                platforms.shift();
+                generatePlatform();
+                platformScore += 10;
+                document.getElementById('platformScore').textContent = platformScore;
+            }
+
+            // Draw player
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(platformPlayer.x, platformPlayer.y, platformPlayer.width, platformPlayer.height);
+
+            // Draw platforms
+            ctx.fillStyle = '#ffffff';
+            platforms.forEach(platform => {
+                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+            });
+
+            // Game over if player falls off screen
+            if (platformPlayer.y > canvas.height) {
+                platformGameOver();
+            }
+        }
+
+        function platformJump() {
+            if (!platformPlayer.jumping) {
+                platformPlayer.velocityY = -12;
+                platformPlayer.jumping = true;
+            }
+        }
+
+        function platformGameOver() {
+            platformGameActive = false;
+            clearInterval(platformInterval);
+            alert('Game Over! Distance: ' + platformScore + 'm');
+        }
+
+        // Platform game controls
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' || e.code === 'ArrowUp') {
+                platformJump();
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' || e.code === 'ArrowUp') {
+                platformJump();
+            }
+        });
+
+        // Mobile controls for platform game
+        document.addEventListener('touchstart', function(e) {
+            const canvas = document.getElementById('platformCanvas');
+            if (!canvas) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            if (e.touches[0].clientX >= rect.left && e.touches[0].clientX <= rect.right &&
+                e.touches[0].clientY >= rect.top && e.touches[0].clientY <= rect.bottom) {
+                platformJump();
+            }
+        });
+
+        // Add platform game instructions
+        function startPlatformGame() {
+            if (platformGameActive) return;
+
+            platformPlayer = {
+                x: 50,
+                y: 300,
+                width: 30,
+                height: 30,
+                velocityY: 0,
+                jumping: false
+            };
+            platforms = [
+                { x: 0, y: 350, width: 800, height: 20 }
+            ];
+            platformScore = 0;
+            platformGameActive = true;
+
+            if (platformInterval) clearInterval(platformInterval);
+            platformInterval = setInterval(platformGameLoop, 1000/60);
+
+            // Generate initial platforms
+            for (let i = 0; i < 5; i++) {
+                generatePlatform();
+            }
+
+            document.getElementById('platformScore').textContent = platformScore;
+
+            // Show instructions
+            const canvas = document.getElementById('platformCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '20px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('Press SPACE or UP ARROW to jump', canvas.width/2, 50);
+            ctx.fillText('Avoid falling and survive as long as possible!', canvas.width/2, 80);
+        }
+
+        // Enhanced platform game loop with visual effects
+        function platformGameLoop() {
+            const canvas = document.getElementById('platformCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas with gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#000000');
+            gradient.addColorStop(1, '#1a0000');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Apply gravity
+            platformPlayer.velocityY += 0.5;
+            platformPlayer.y += platformPlayer.velocityY;
+
+            // Check platform collisions
+            platforms.forEach(platform => {
+                if (platformPlayer.y + platformPlayer.height > platform.y &&
+                    platformPlayer.y < platform.y + platform.height &&
+                    platformPlayer.x + platformPlayer.width > platform.x &&
+                    platformPlayer.x < platform.x + platform.width) {
+                    if (platformPlayer.velocityY > 0) {
+                        platformPlayer.y = platform.y - platformPlayer.height;
+                        platformPlayer.velocityY = 0;
+                        platformPlayer.jumping = false;
+
+                        // Add landing effect
+                        ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+                        ctx.beginPath();
+                        ctx.arc(platformPlayer.x + platformPlayer.width/2, platformPlayer.y + platformPlayer.height, 20, 0, Math.PI*2);
+                        ctx.fill();
+                    }
+                }
+            });
+
+            // Move platforms left
+            platforms.forEach(platform => {
+                platform.x -= 2;
+            });
+
+            // Remove off-screen platforms and generate new ones
+            if (platforms[0].x + platforms[0].width < 0) {
+                platforms.shift();
+                generatePlatform();
+                platformScore += 10;
+                document.getElementById('platformScore').textContent = platformScore;
+            }
+
+            // Draw player with shadow effect
+            ctx.shadowColor = '#ff0000';
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(platformPlayer.x, platformPlayer.y, platformPlayer.width, platformPlayer.height);
+            ctx.shadowBlur = 0;
+
+            // Draw platforms with glow effect
+            platforms.forEach(platform => {
+                ctx.shadowColor = '#ffffff';
+                ctx.shadowBlur = 15;
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+                ctx.shadowBlur = 0;
+            });
+
+            // Draw score with glow effect
+            ctx.shadowColor = '#ff0000';
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '20px VT323';
+            ctx.textAlign = 'left';
+            ctx.fillText('DISTANCE: ' + platformScore + 'm', 10, 30);
+            ctx.shadowBlur = 0;
+
+            // Game over if player falls off screen
+            if (platformPlayer.y > canvas.height) {
+                platformGameOver();
+            }
+        }
+
+        // Enhanced platform jump with visual effect
+        function platformJump() {
+            if (!platformPlayer.jumping) {
+                platformPlayer.velocityY = -12;
+                platformPlayer.jumping = true;
+
+                // Add jump effect
+                const canvas = document.getElementById('platformCanvas');
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+                ctx.beginPath();
+                ctx.arc(platformPlayer.x + platformPlayer.width/2, platformPlayer.y + platformPlayer.height, 20, 0, Math.PI*2);
+                ctx.fill();
+            }
+        }
+
+        // Enhanced game over with visual effect
+        function platformGameOver() {
+            platformGameActive = false;
+            clearInterval(platformInterval);
+
+            const canvas = document.getElementById('platformCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Add game over effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.shadowColor = '#ff0000';
+            ctx.shadowBlur = 20;
+            ctx.fillStyle = '#ff0000';
+            ctx.font = '48px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2);
+            ctx.font = '24px VT323';
+            ctx.fillText('Distance: ' + platformScore + 'm', canvas.width/2, canvas.height/2 + 40);
+            ctx.shadowBlur = 0;
+
+            setTimeout(() => {
+                alert('Game Over! Distance: ' + platformScore + 'm');
+            }, 500);
+        }
+
+        // Puzzle Game
+        let puzzleGrid = [];
+        let puzzleSize = 3;
+        let puzzleMoves = 0;
+        let puzzleGameActive = false;
+
+        function startPuzzleGame() {
+            if (puzzleGameActive) return;
+
+            puzzleGrid = [];
+            puzzleMoves = 0;
+            document.getElementById('puzzleMoves').textContent = puzzleMoves;
+
+            // Initialize grid
+            let numbers = Array.from({length: puzzleSize * puzzleSize - 1}, (_, i) => i + 1);
+            numbers.push(null); // Empty space
+            numbers = shufflePuzzle(numbers);
+
+            for (let i = 0; i < puzzleSize; i++) {
+                puzzleGrid[i] = [];
+                for (let j = 0; j < puzzleSize; j++) {
+                    puzzleGrid[i][j] = numbers[i * puzzleSize + j];
+                }
+            }
+
+            puzzleGameActive = true;
+            drawPuzzle();
+        }
+
+        function shufflePuzzle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function drawPuzzle() {
+            const canvas = document.getElementById('puzzleCanvas');
+            const ctx = canvas.getContext('2d');
+            const tileSize = canvas.width / puzzleSize;
+
+            // Draw background with gradient
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#000000');
+            gradient.addColorStop(1, '#1a0000');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw grid lines with glow effect
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 2;
+            ctx.shadowColor = '#ff0000';
+            ctx.shadowBlur = 10;
+            for (let i = 1; i < puzzleSize; i++) {
+                ctx.beginPath();
+                ctx.moveTo(i * tileSize, 0);
+                ctx.lineTo(i * tileSize, canvas.height);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(0, i * tileSize);
+                ctx.lineTo(canvas.width, i * tileSize);
+                ctx.stroke();
+            }
+            ctx.shadowBlur = 0;
+
+            // Draw tiles with 3D effect and glow
+            for (let i = 0; i < puzzleSize; i++) {
+                for (let j = 0; j < puzzleSize; j++) {
+                    if (puzzleGrid[i][j] !== null) {
+                        // Tile background with gradient
+                        const tileGradient = ctx.createLinearGradient(
+                            j * tileSize, i * tileSize,
+                            (j + 1) * tileSize, (i + 1) * tileSize
+                        );
+                        tileGradient.addColorStop(0, '#ff0000');
+                        tileGradient.addColorStop(1, '#800000');
+                        
+                        ctx.shadowColor = '#ff0000';
+                        ctx.shadowBlur = 15;
+                        ctx.fillStyle = tileGradient;
+                        ctx.fillRect(
+                            j * tileSize + 8,
+                            i * tileSize + 8,
+                            tileSize - 16,
+                            tileSize - 16
+                        );
+                        
+                        // Add 3D effect
+                        ctx.fillStyle = '#ff3333';
+                        ctx.beginPath();
+                        ctx.moveTo(j * tileSize + 8, i * tileSize + 8);
+                        ctx.lineTo(j * tileSize + 16, i * tileSize + 16);
+                        ctx.lineTo(j * tileSize + tileSize - 8, i * tileSize + 16);
+                        ctx.lineTo(j * tileSize + tileSize - 16, i * tileSize + 8);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        ctx.fillStyle = '#cc0000';
+                        ctx.beginPath();
+                        ctx.moveTo(j * tileSize + tileSize - 16, i * tileSize + 8);
+                        ctx.lineTo(j * tileSize + tileSize - 8, i * tileSize + 16);
+                        ctx.lineTo(j * tileSize + tileSize - 8, i * tileSize + tileSize - 8);
+                        ctx.lineTo(j * tileSize + tileSize - 16, i * tileSize + tileSize - 16);
+                        ctx.closePath();
+                        ctx.fill();
+                        
+                        // Number with glow effect
+                        ctx.shadowColor = '#ffffff';
+                        ctx.shadowBlur = 10;
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = 'bold 36px VT323';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(
+                            puzzleGrid[i][j],
+                            j * tileSize + tileSize/2,
+                            i * tileSize + tileSize/2
+                        );
+                        ctx.shadowBlur = 0;
+                    }
+                }
+            }
+        }
+
+        function handlePuzzleClick(e) {
+            if (!puzzleGameActive) return;
+
+            const canvas = document.getElementById('puzzleCanvas');
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const tileSize = canvas.width / puzzleSize;
+
+            const j = Math.floor(x / tileSize);
+            const i = Math.floor(y / tileSize);
+
+            if (canMovePuzzleTile(i, j)) {
+                movePuzzleTile(i, j);
+                puzzleMoves++;
+                document.getElementById('puzzleMoves').textContent = puzzleMoves;
+                drawPuzzle();
+
+                if (isPuzzleSolved()) {
+                    puzzleGameActive = false;
+                    alert('Puzzle Solved in ' + puzzleMoves + ' moves!');
+                }
+            }
+        }
+
+        function canMovePuzzleTile(i, j) {
+            // Check adjacent tiles for empty space
+            return (i > 0 && puzzleGrid[i-1][j] === null) ||
+                   (i < puzzleSize-1 && puzzleGrid[i+1][j] === null) ||
+                   (j > 0 && puzzleGrid[i][j-1] === null) ||
+                   (j < puzzleSize-1 && puzzleGrid[i][j+1] === null);
+        }
+
+        function movePuzzleTile(i, j) {
+            // Find empty space and swap
+            if (i > 0 && puzzleGrid[i-1][j] === null) {
+                [puzzleGrid[i][j], puzzleGrid[i-1][j]] = [puzzleGrid[i-1][j], puzzleGrid[i][j]];
+            } else if (i < puzzleSize-1 && puzzleGrid[i+1][j] === null) {
+                [puzzleGrid[i][j], puzzleGrid[i+1][j]] = [puzzleGrid[i+1][j], puzzleGrid[i][j]];
+            } else if (j > 0 && puzzleGrid[i][j-1] === null) {
+                [puzzleGrid[i][j], puzzleGrid[i][j-1]] = [puzzleGrid[i][j-1], puzzleGrid[i][j]];
+            } else if (j < puzzleSize-1 && puzzleGrid[i][j+1] === null) {
+                [puzzleGrid[i][j], puzzleGrid[i][j+1]] = [puzzleGrid[i][j+1], puzzleGrid[i][j]];
+            }
+        }
+
+        function isPuzzleSolved() {
+            let count = 1;
+            for (let i = 0; i < puzzleSize; i++) {
+                for (let j = 0; j < puzzleSize; j++) {
+                    if (i === puzzleSize-1 && j === puzzleSize-1) {
+                        if (puzzleGrid[i][j] !== null) return false;
+                    } else {
+                        if (puzzleGrid[i][j] !== count++) return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Add puzzle click handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const puzzleCanvas = document.getElementById('puzzleCanvas');
+            if (puzzleCanvas) {
+                puzzleCanvas.addEventListener('click', handlePuzzleClick);
+            }
+        });
+
+        // Enhanced puzzle game with visual effects
+        function startPuzzleGame() {
+            if (puzzleGameActive) return;
+
+            puzzleGrid = [];
+            puzzleMoves = 0;
+            document.getElementById('puzzleMoves').textContent = puzzleMoves;
+
+            // Initialize grid
+            let numbers = Array.from({length: puzzleSize * puzzleSize - 1}, (_, i) => i + 1);
+            numbers.push(null); // Empty space
+            numbers = shufflePuzzle(numbers);
+
+            for (let i = 0; i < puzzleSize; i++) {
+                puzzleGrid[i] = [];
+                for (let j = 0; j < puzzleSize; j++) {
+                    puzzleGrid[i][j] = numbers[i * puzzleSize + j];
+                }
+            }
+
+            puzzleGameActive = true;
+
+            // Show instructions
+            const canvas = document.getElementById('puzzleCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '20px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('Click tiles to move them', canvas.width/2, 50);
+            ctx.fillText('Arrange numbers in order to win!', canvas.width/2, 80);
+
+            drawPuzzle();
+        }
+
+        function drawPuzzle() {
+            const canvas = document.getElementById('puzzleCanvas');
+            const ctx = canvas.getContext('2d');
+            const tileSize = canvas.width / puzzleSize;
+
+            // Draw background with gradient
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#000000');
+            gradient.addColorStop(1, '#1a0000');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw grid lines with glow effect
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 2;
+            ctx.shadowColor = '#ff0000';
+            ctx.shadowBlur = 10;
+            for (let i = 1; i < puzzleSize; i++) {
+                ctx.beginPath();
+                ctx.moveTo(i * tileSize, 0);
+                ctx.lineTo(i * tileSize, canvas.height);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(0, i * tileSize);
+                ctx.lineTo(canvas.width, i * tileSize);
+                ctx.stroke();
+            }
+            ctx.shadowBlur = 0;
+
+            // Draw tiles with 3D effect and glow
+            for (let i = 0; i < puzzleSize; i++) {
+                for (let j = 0; j < puzzleSize; j++) {
+                    if (puzzleGrid[i][j] !== null) {
+                        // Tile background with gradient
+                        const tileGradient = ctx.createLinearGradient(
+                            j * tileSize, i * tileSize,
+                            (j + 1) * tileSize, (i + 1) * tileSize
+                        );
+                        tileGradient.addColorStop(0, '#ff0000');
+                        tileGradient.addColorStop(1, '#800000');
+                        
+                        ctx.shadowColor = '#ff0000';
+                        ctx.shadowBlur = 15;
+                        ctx.fillStyle = tileGradient;
+                        ctx.fillRect(
+                            j * tileSize + 4,
+                            i * tileSize + 4,
+                            tileSize - 8,
+                            tileSize - 8
+                        );
+                        
+                        // Number with glow effect
+                        ctx.shadowColor = '#ffffff';
+                        ctx.shadowBlur = 10;
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = 'bold 36px VT323';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(
+                            puzzleGrid[i][j],
+                            j * tileSize + tileSize/2,
+                            i * tileSize + tileSize/2
+                        );
+                        ctx.shadowBlur = 0;
+                    }
+                }
+            }
+        }
+
+        function handlePuzzleClick(e) {
+            if (!puzzleGameActive) return;
+
+            const canvas = document.getElementById('puzzleCanvas');
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const tileSize = canvas.width / puzzleSize;
+
+            const j = Math.floor(x / tileSize);
+            const i = Math.floor(y / tileSize);
+
+            if (canMovePuzzleTile(i, j)) {
+                // Add click effect
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.beginPath();
+                ctx.arc(
+                    j * tileSize + tileSize/2,
+                    i * tileSize + tileSize/2,
+                    20, 0, Math.PI*2
+                );
+                ctx.fill();
+
+                movePuzzleTile(i, j);
+                puzzleMoves++;
+                document.getElementById('puzzleMoves').textContent = puzzleMoves;
+                drawPuzzle();
+
+                if (isPuzzleSolved()) {
+                    puzzleGameActive = false;
+                    
+                    // Victory animation
+                    const victoryAnimation = () => {
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        
+                        ctx.shadowColor = '#ff0000';
+                        ctx.shadowBlur = 20;
+                        ctx.fillStyle = '#ff0000';
+                        ctx.font = '48px VT323';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('VICTORY!', canvas.width/2, canvas.height/2);
+                        ctx.font = '24px VT323';
+                        ctx.fillText(
+                            'Completed in ' + puzzleMoves + ' moves',
+                            canvas.width/2,
+                            canvas.height/2 + 40
+                        );
+                    };
+                    
+                    setTimeout(victoryAnimation, 100);
+                    setTimeout(() => {
+                        alert('Puzzle Solved in ' + puzzleMoves + ' moves!');
+                    }, 500);
+                }
+            }
+        }
+
+        function startGame() {
+            if (gameActive) return;
+            
+            // Reset game state
+            shooterPlayer = { x: 200, y: 450, width: 40, height: 30 };
+            bullets = [];
+            enemies = [];
+            score = 0;
+            document.getElementById('score').textContent = score;
+            
+            // Clear previous interval if exists
+            if (gameInterval) clearInterval(gameInterval);
+            
+            gameActive = true;
+            
+            // Start game loop
+            gameInterval = setInterval(gameLoop, 1000/60); // 60 FPS
+            
+            // Start spawning enemies
+            spawnEnemy();
+        }
+        
+        function spawnEnemy() {
+            if (!gameActive) return;
+            
+            const enemy = {
+                x: Math.random() * (400 - 30),
+                y: -30,
+                width: 30,
+                height: 30,
+                speed: 2
+            };
+            
+            enemies.push(enemy);
+            
+            // Schedule next enemy spawn
+            setTimeout(spawnEnemy, 1000);
+        }
+        
+        function gameLoop() {
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw player
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+            
+            // Update and draw bullets
+            for (let i = bullets.length - 1; i >= 0; i--) {
+                const bullet = bullets[i];
+                bullet.y -= 5;
+                
+                // Remove bullets that are off screen
+                if (bullet.y < 0) {
+                    bullets.splice(i, 1);
+                    continue;
+                }
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(bullet.x, bullet.y, 4, 10);
+                
+                // Check for collisions with enemies
+                for (let j = enemies.length - 1; j >= 0; j--) {
+                    const enemy = enemies[j];
+                    if (bullet.x < enemy.x + enemy.width &&
+                        bullet.x + 4 > enemy.x &&
+                        bullet.y < enemy.y + enemy.height &&
+                        bullet.y + 10 > enemy.y) {
+                        
+                        // Remove both bullet and enemy
+                        bullets.splice(i, 1);
+                        enemies.splice(j, 1);
+                        
+                        // Increase score
+                        score += 10;
+                        document.getElementById('score').textContent = score;
+                        break;
+                    }
+                }
+            }
+            
+            // Update and draw enemies
+            for (let i = enemies.length - 1; i >= 0; i--) {
+                const enemy = enemies[i];
+                enemy.y += enemy.speed;
+                
+                // Game over if enemy reaches bottom
+                if (enemy.y > canvas.height) {
+                    gameOver();
+                    return;
+                }
+                
+                // Draw enemy (META logo)
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+                ctx.fillStyle = '#ff0000';
+                ctx.font = '20px VT323';
+                ctx.fillText('M', enemy.x + 8, enemy.y + 22);
+                
+                // Check for collision with player
+                if (enemy.x < player.x + player.width &&
+                    enemy.x + enemy.width > player.x &&
+                    enemy.y < player.y + player.height &&
+                    enemy.y + enemy.height > player.y) {
+                    gameOver();
+                    return;
+                }
+            }
+        }
+        
+        function shoot() {
+            if (!gameActive) return;
+            
+            const bullet = {
+                x: player.x + player.width/2 - 2,
+                y: player.y
+            };
+            bullets.push(bullet);
+        }
+        
+        function gameOver() {
+            gameActive = false;
+            clearInterval(gameInterval);
+            alert('Game Over! META Destroyed: ' + score);
+        }
+        
+        // Game controls
+        document.addEventListener('mousemove', function(e) {
+            if (!gameActive) return;
+            
+            const canvas = document.getElementById('gameCanvas');
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            
+            // Keep player within canvas bounds
+            player.x = Math.max(0, Math.min(canvas.width - player.width, x));
+        });
+        
+        document.addEventListener('click', function(e) {
+            const canvas = document.getElementById('gameCanvas');
+            const rect = canvas.getBoundingClientRect();
+            
+            // Only shoot if click is within canvas
+            if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                shoot();
+            }
+        });
+        
+        // Sound Effects
+        const sounds = {
+            fart: 'https://www.myinstants.com/media/sounds/fart-with-reverb.mp3',
+            laugh: 'https://www.myinstants.com/media/sounds/evil-laugh_1.mp3',
+            drum: 'https://www.myinstants.com/media/sounds/badum-tss.mp3',
+            airhorn: 'https://www.myinstants.com/media/sounds/mlg-airhorn.mp3'
+        };
+
+        // Calculator functions
+        function appendToCalc(value) {
+            document.getElementById('calcDisplay').value += value;
+        }
+
+        function clearCalc() {
+            document.getElementById('calcDisplay').value = '';
+        }
+
+        function calculateResult() {
+            try {
+                const result = eval(document.getElementById('calcDisplay').value);
+                document.getElementById('calcDisplay').value = result;
+            } catch (error) {
+                document.getElementById('calcDisplay').value = 'Error';
+            }
+        }
+
+        // Notepad functions
+        function saveNotepad() {
+            const text = document.getElementById('notepadText').value;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'notepad.txt';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Paint functions
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        function initPaint() {
+            const canvas = document.getElementById('paintCanvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#ff8c00';
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.lineWidth = 5;
+
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const canvas = document.getElementById('paintCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = document.getElementById('colorPicker').value;
+            ctx.lineWidth = document.getElementById('brushSize').value;
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearCanvas() {
+            const canvas = document.getElementById('paintCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function savePaint() {
+            const canvas = document.getElementById('paintCanvas');
+            const image = canvas.toDataURL('image/png');
+            const a = document.createElement('a');
+            a.href = image;
+            a.download = 'paint.png';
+            a.click();
+        }
+
+        function clearNotepad() {
+            document.getElementById('notepadText').value = '';
+        }
+
+        function playSound(soundName) {
+            const audio = new Audio(sounds[soundName]);
+            audio.play();
+        }
+
+        // Initialize Paint when window is opened
+        const originalCreateWindow = createWindow;
+        createWindow = function(id) {
+            originalCreateWindow(id);
+            if (id === 'paint') {
+                setTimeout(initPaint, 100);
+            }
+        };
+
+        // WebSocket Chat Implementation
+        let ws;
+        let username = '';
+        let reconnectAttempts = 0;
+        const MAX_RECONNECT_ATTEMPTS = 5;
+        const RECONNECT_DELAY = 3000;
+
+        function connectWebSocket() {
+            try {
+                ws = new WebSocket('wss://wearemeta-chat.onrender.com');
+
+                ws.addEventListener('error', (error) => {
+                    console.error('WebSocket error:', error);
+                    const messages = document.getElementById('chat-messages');
+                    messages.innerHTML += `<div style="color: #ff0000;">[SYSTEM] Connection error. Attempting to reconnect...</div>`;
+                    messages.scrollTop = messages.scrollHeight;
+                    
+                    if (reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
+                        setTimeout(connectWebSocket, RECONNECT_DELAY);
+                        reconnectAttempts++;
+                    }
+                });
+            } catch (error) {
+                console.error('WebSocket connection error:', error);
+                const messages = document.getElementById('chat-messages');
+                messages.innerHTML += `<div style="color: #ff0000;">[SYSTEM] Failed to connect to chat server</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }
+
+            ws.addEventListener('open', () => {
+                console.log('Connected to chat server');
+                reconnectAttempts = 0;
+                const messages = document.getElementById('chat-messages');
+                messages.innerHTML += `<div style="color: #00ff00;">[SYSTEM] Connected to chat server</div>`;
+                messages.scrollTop = messages.scrollHeight;
+
+                // Send join message
+                if (username) {
+                    ws.send(JSON.stringify({
+                        type: 'join',
+                        username: username,
+                        message: 'has joined the resistance'
+                    }));
+                }
+            });
+
+            ws.addEventListener('close', () => {
+                console.log('Disconnected from chat server');
+                const messages = document.getElementById('chat-messages');
+                messages.innerHTML += `<div style="color: #ff0000;">[SYSTEM] Connection lost. Attempting to reconnect...</div>`;
+                messages.scrollTop = messages.scrollHeight;
+
+                if (reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
+                    setTimeout(connectWebSocket, RECONNECT_DELAY);
+                    reconnectAttempts++;
+                } else {
+                    messages.innerHTML += `<div style="color: #ff0000;">[SYSTEM] Could not reconnect. Please refresh the page.</div>`;
+                    messages.scrollTop = messages.scrollHeight;
+                }
+            });
+
+            ws.addEventListener('message', (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    const messages = document.getElementById('chat-messages');
+                    let messageHTML = '';
+
+                    if (data.type === 'join') {
+                        messageHTML = `<div style="color: #00ff00;">[SYSTEM] ${data.username} ${data.message}</div>`;
+                    } else if (data.type === 'leave') {
+                        messageHTML = `<div style="color: #ff0000;">[SYSTEM] ${data.username} has left the resistance</div>`;
+                    } else {
+                        messageHTML = `<div><span style="color: #ff0000;">[${data.username}]</span> ${data.message}</div>`;
+                    }
+
+                    messages.innerHTML += messageHTML;
+                    messages.scrollTop = messages.scrollHeight;
+                } catch (error) {
+                    console.error('Error parsing message:', error);
+                }
+            });
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                const messages = document.getElementById('chat-messages');
+                messages.innerHTML += `<div style="color: #ff0000;">[SYSTEM] Error connecting to chat server</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            };
+        }
+
+        function joinChat() {
+            const usernameInput = document.getElementById('username-input');
+            username = usernameInput.value.trim();
+            
+            if (!username) {
+                alert('Please enter a codename');
+                return;
+            }
+
+            // Connect to WebSocket server
+            connectWebSocket();
+
+            // Show chat interface
+            document.getElementById('chat-login').style.display = 'none';
+            document.getElementById('chat-main').style.display = 'flex';
+            
+            // Setup message input
+            const messageInput = document.getElementById('message-input');
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Send join message once connection is established
+            const checkConnection = setInterval(() => {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({
+                        type: 'join',
+                        username: username,
+                        message: 'has joined the resistance'
+                    }));
+                    clearInterval(checkConnection);
+                }
+            }, 100);
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim();
+            
+            if (message && ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({
+                    type: 'message',
+                    username: username,
+                    message: message
+                }));
+                
+                messageInput.value = '';
+            } else if (!ws || ws.readyState !== WebSocket.OPEN) {
+                const messages = document.getElementById('chat-messages');
+                messages.innerHTML += `<div style="color: #ff0000;">[SYSTEM] Not connected to chat server. Please refresh the page.</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+
+        // Handle page unload to send leave message
+        window.addEventListener('beforeunload', () => {
+            if (ws && ws.readyState === WebSocket.OPEN && username) {
+                ws.send(JSON.stringify({
+                    type: 'leave',
+                    username: username
+                }));
+            }
+        });
+    </script>
