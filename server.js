@@ -6,12 +6,42 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ 
     server,
-    verifyClient: () => true
+    verifyClient: (info) => {
+        // Accept connections from any origin
+        return true;
+    },
+    clientTracking: true
+});
+
+// Add heartbeat to keep connections alive
+function heartbeat() {
+    this.isAlive = true;
+}
+
+wss.on('connection', (ws) => {
+    ws.isAlive = true;
+    ws.on('pong', heartbeat);
+});
+
+const interval = setInterval(() => {
+    wss.clients.forEach((ws) => {
+        if (ws.isAlive === false) return ws.terminate();
+        ws.isAlive = false;
+        ws.ping(() => {});
+    });
+}, 30000);
+
+wss.on('close', () => {
+    clearInterval(interval);
 });
 
 // MongoDB connection
